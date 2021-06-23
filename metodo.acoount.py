@@ -1,24 +1,27 @@
 class User:		# aqui está lo que tenemos hasta ahora
-    def __init__(self, name, email):
+    def __init__(self, name, email,num):
         self.name = name
         self.email = email
-        self.account= BankAccount (int_rate = 0.02, balance = 0)
-        self.account2= BankAccount (int_rate = 0.02, balance = 0)
+        # self.account= BankAccount (int_rate = 0.02, balance = 0)
+        self.account = []
+        for x in range(num):
+            obj = BankAccount(int_rate = 0.02, balance = 0)
+            self.account.append(obj)
+
     def make_deposit(self, amount, num):	# toma un argumento que es el monto del depósito
-        setattr("account" + str(num)).deposit()
-
+        self.account[num].deposit(amount)
         return self
 
-"""     def make_withdrawal (self, amount):
-        self.account.withdraw(amount)
+    def make_withdrawal (self, amount, num):
+        self.account[num].withdraw(amount)
         return self
-    def display_user_balance (self):
-        print(f"Usuario: {self.name}, Saldo: {self.account.display_account_info()} ")
+    def display_user_balance (self,num):
+        print(f"Usuario: {self.name}, Saldo: {self.account[num].display_account_info()} ")
         return self
     def transfer_money (self, other_user, amount):
         self.account.withdraw(amount)
         other_user.account.deposit(amount)
- """
+
 
 class BankAccount:
     def __init__(self, int_rate = 0.02, balance = 0):
@@ -41,26 +44,17 @@ class BankAccount:
             self.balance += (self.int_rate* self.balance)
         else:
             print("No Hay Saldo!!!")
-        return self
+        return
 
-gonzalo = User("Gonzalo Ibarra","gonzalo@gmail.com")
+gonzalo = User("Gonzalo Ibarra","gonzalo@gmail.com",2)
 
-gonzalo.make_deposit(100)
-gonzalo.make_deposit(300)
+
+gonzalo.make_deposit(100,1)
+gonzalo.make_deposit(300,1)
+gonzalo.make_withdrawal(150,1)
+gonzalo.make_deposit(1000,0)
 """ gonzalo.make_withdrawal(50) """
 
-gonzalo.display_user_balance()
-print(gonzalo.account.balance)
-
-class account(object):
-    pass
-cuenta1 = account()
-num =2
-l = setattr(cuenta1,"account" + str(num), num)
-print(l)
-
-for i in range(1,10):
-     globals()["var" + str(i)] = i*i
-
-for i in range(1,10):
-    print(globals()["var" + str(i)])
+gonzalo.display_user_balance(1)
+gonzalo.display_user_balance(0)
+print(gonzalo.account[1].balance)

@@ -3,7 +3,6 @@ class User:		# aqui está lo que tenemos hasta ahora
         self.name = name
         self.email = email
         self.account= BankAccount (int_rate = 0.02, balance = 0)
-        self.account2= BankAccount (int_rate = 0.02, balance = 0)
     def make_deposit(self, amount):	# toma un argumento que es el monto del depósito
         self.account.deposit(amount)
         return self
